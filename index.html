@@ -30,11 +30,12 @@
 
         .label {
             color: dimgray;
+            font-size: 16px;
         }
 
         .result {
             margin: 10px 0 20px 0;
-            font-size: 28px;
+            font-size: 30px;
         }
 
         .grid-container {
@@ -56,29 +57,29 @@
 
     <div class="grid-container">
         <div class="block">
-            <div class="label">INR to AUD</div>
+            <div class="label">🇮🇳 INR → 🇦🇺 AUD</div>
             <div class="result" id="inr-aud"></div>
         </div>
         <div class="block">
-            <div class="label">AUD to INR</div>
+            <div class="label">🇦🇺 AUD → 🇮🇳 INR</div>
             <div class="result" id="aud-inr"></div>
         </div>
 
         <div class="block">
-            <div class="label">INR to IDR</div>
+            <div class="label">🇮🇳 INR → 🇮🇩 IDR</div>
             <div class="result" id="inr-idr"></div>
         </div>
         <div class="block">
-            <div class="label">IDR to INR</div>
+            <div class="label">🇮🇩 IDR → 🇮🇳 </div>
             <div class="result" id="idr-inr"></div>
         </div>
 
         <div class="block">
-            <div class="label">INR to VND</div>
+            <div class="label">🇮🇳 INR → 🇻🇳 VND</div>
             <div class="result" id="inr-vnd"></div>
         </div>
         <div class="block">
-            <div class="label">VND to INR</div>
+            <div class="label">🇻🇳 VND → 🇮🇳 INR </div>
             <div class="result" id="vnd-inr"></div>
         </div>
     </div>
@@ -101,14 +102,14 @@
         document.getElementById('vnd-inr').textContent = `${exchangeRates.VND_INR}`;
 
         document.getElementById('amount').addEventListener('input', function () {
-            const amount = parseInt(this.value);
+            const amount = parseFloat(this.value);
             if (!isNaN(amount)) {
-                document.getElementById('inr-aud').textContent = `${amount * exchangeRates.INR_AUD}`;
-                document.getElementById('aud-inr').textContent = `${amount * exchangeRates.AUD_INR}`;
-                document.getElementById('inr-idr').textContent = `${amount * exchangeRates.INR_IDR}`;
-                document.getElementById('idr-inr').textContent = `${amount * exchangeRates.IDR_INR}`;
-                document.getElementById('inr-vnd').textContent = `${amount * exchangeRates.INR_VND}`;
-                document.getElementById('vnd-inr').textContent = `${amount * exchangeRates.VND_INR}`;
+                document.getElementById('inr-aud').textContent = `${(amount * exchangeRates.INR_AUD).toFixed(2)} AUD`;
+                document.getElementById('aud-inr').textContent = `${(amount * exchangeRates.AUD_INR).toFixed(2)} INR`;
+                document.getElementById('inr-idr').textContent = `${(amount * exchangeRates.INR_IDR).toFixed(2)} IDR`;
+                document.getElementById('idr-inr').textContent = `${(amount * exchangeRates.IDR_INR).toFixed(2)} INR`;
+                document.getElementById('inr-vnd').textContent = `${(amount * exchangeRates.INR_VND).toFixed(2)} VND`;
+                document.getElementById('vnd-inr').textContent = `${(amount * exchangeRates.VND_INR).toFixed(2)} INR`;
             } else {
                 document.querySelectorAll('.result').forEach(el => el.textContent = '');
             }
