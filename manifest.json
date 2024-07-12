@@ -1,0 +1,16 @@
+{
+    "name": "Currency Converter",
+    "short_name": "CurrencyConverter",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "description": "A simple currency converter PWA",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
