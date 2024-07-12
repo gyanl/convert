@@ -106,7 +106,14 @@
             if (!isNaN(amount)) {
                 document.getElementById('inr-aud').textContent = `${(amount * exchangeRates.INR_AUD).toFixed(2)} AUD`;
                 document.getElementById('aud-inr').textContent = `${(amount * exchangeRates.AUD_INR).toFixed(2)} INR`;
-                document.getElementById('inr-idr').textContent = `${(amount * exchangeRates.INR_IDR).toFixed(2)} IDR`;
+                let inrToIdr = amount * exchangeRates.INR_IDR;
+                if (inrToIdr > 1000) {
+                    inrToIdr = `${(inrToIdr / 1000).toFixed(1)}k`;
+                } else {
+                    inrToIdr = inrToIdr.toFixed(2);
+                }                
+                document.getElementById('inr-idr').textContent = `${inrToIdr} IDR`;
+
                 document.getElementById('idr-inr').textContent = `${(amount * exchangeRates.IDR_INR).toFixed(2)} INR`;
 
                 let inrToVnd = amount * exchangeRates.INR_VND;
