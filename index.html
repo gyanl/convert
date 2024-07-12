@@ -108,7 +108,15 @@
                 document.getElementById('aud-inr').textContent = `${(amount * exchangeRates.AUD_INR).toFixed(2)} INR`;
                 document.getElementById('inr-idr').textContent = `${(amount * exchangeRates.INR_IDR).toFixed(2)} IDR`;
                 document.getElementById('idr-inr').textContent = `${(amount * exchangeRates.IDR_INR).toFixed(2)} INR`;
-                document.getElementById('inr-vnd').textContent = `${(amount * exchangeRates.INR_VND).toFixed(2)} VND`;
+
+                let inrToVnd = amount * exchangeRates.INR_VND;
+                if (inrToVnd > 1000) {
+                    inrToVnd = `${(inrToVnd / 1000).toFixed(1)}k`;
+                } else {
+                    inrToVnd = inrToVnd.toFixed(2);
+                }
+                document.getElementById('inr-vnd').textContent = `${inrToVnd} VND`;
+
                 document.getElementById('vnd-inr').textContent = `${(amount * exchangeRates.VND_INR).toFixed(2)} INR`;
             } else {
                 document.querySelectorAll('.result').forEach(el => el.textContent = '');
