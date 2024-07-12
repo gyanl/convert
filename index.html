@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,30 +8,80 @@
     <link rel="manifest" href="/manifest.json">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
             padding: 20px;
         }
+
         input {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
-            font-size: 18px;
+            font-size: 60px;
+            border: none;
+            outline: none;
+            text-align: center;
+            height: 120px;
         }
+
+        input::placeholder {
+            color: #ccc;
+            font-style: italic;
+        }
+
+        .label {
+            color: dimgray;
+        }
+
         .result {
-            margin: 10px 0;
-            font-size: 18px;
+            margin: 10px 0 20px 0;
+            font-size: 28px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .block {
+            display: flex;
+            flex-direction: column;
         }
     </style>
 </head>
+
 <body>
-    <h1>Currency Converter</h1>
-    <input type="number" id="amount" placeholder="Enter amount in INR">
-    <div class="result" id="inr-aud"></div>
-    <div class="result" id="aud-inr"></div>
-    <div class="result" id="inr-idr"></div>
-    <div class="result" id="idr-inr"></div>
-    <div class="result" id="inr-vnd"></div>
-    <div class="result" id="vnd-inr"></div>
+    <h1>C + G Trip Convertor</h1>
+    <input type="number" id="amount" placeholder="0.00">
+
+    <div class="grid-container">
+        <div class="block">
+            <div class="label">INR to AUD</div>
+            <div class="result" id="inr-aud"></div>
+        </div>
+        <div class="block">
+            <div class="label">AUD to INR</div>
+            <div class="result" id="aud-inr"></div>
+        </div>
+
+        <div class="block">
+            <div class="label">INR to IDR</div>
+            <div class="result" id="inr-idr"></div>
+        </div>
+        <div class="block">
+            <div class="label">IDR to INR</div>
+            <div class="result" id="idr-inr"></div>
+        </div>
+
+        <div class="block">
+            <div class="label">INR to VND</div>
+            <div class="result" id="inr-vnd"></div>
+        </div>
+        <div class="block">
+            <div class="label">VND to INR</div>
+            <div class="result" id="vnd-inr"></div>
+        </div>
+    </div>
 
     <script>
         const exchangeRates = {
@@ -42,19 +93,27 @@
             'VND_INR': 0.0036
         };
 
-        document.getElementById('amount').addEventListener('input', function() {
-            const amount = parseFloat(this.value);
+        document.getElementById('inr-aud').textContent = `${exchangeRates.INR_AUD}`;
+        document.getElementById('aud-inr').textContent = `${exchangeRates.AUD_INR}`;
+        document.getElementById('inr-idr').textContent = `${exchangeRates.INR_IDR}`;
+        document.getElementById('idr-inr').textContent = `${exchangeRates.IDR_INR}`;
+        document.getElementById('inr-vnd').textContent = `${exchangeRates.INR_VND}`;
+        document.getElementById('vnd-inr').textContent = `${exchangeRates.VND_INR}`;
+
+        document.getElementById('amount').addEventListener('input', function () {
+            const amount = parseInt(this.value);
             if (!isNaN(amount)) {
-                document.getElementById('inr-aud').textContent = `INR to AUD: ${amount * exchangeRates.INR_AUD}`;
-                document.getElementById('aud-inr').textContent = `AUD to INR: ${amount * exchangeRates.AUD_INR}`;
-                document.getElementById('inr-idr').textContent = `INR to IDR: ${amount * exchangeRates.INR_IDR}`;
-                document.getElementById('idr-inr').textContent = `IDR to INR: ${amount * exchangeRates.IDR_INR}`;
-                document.getElementById('inr-vnd').textContent = `INR to VND: ${amount * exchangeRates.INR_VND}`;
-                document.getElementById('vnd-inr').textContent = `VND to INR: ${amount * exchangeRates.VND_INR}`;
+                document.getElementById('inr-aud').textContent = `${amount * exchangeRates.INR_AUD}`;
+                document.getElementById('aud-inr').textContent = `${amount * exchangeRates.AUD_INR}`;
+                document.getElementById('inr-idr').textContent = `${amount * exchangeRates.INR_IDR}`;
+                document.getElementById('idr-inr').textContent = `${amount * exchangeRates.IDR_INR}`;
+                document.getElementById('inr-vnd').textContent = `${amount * exchangeRates.INR_VND}`;
+                document.getElementById('vnd-inr').textContent = `${amount * exchangeRates.VND_INR}`;
             } else {
                 document.querySelectorAll('.result').forEach(el => el.textContent = '');
             }
         });
     </script>
 </body>
+
 </html>
